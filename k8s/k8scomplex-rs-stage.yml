@@ -21,4 +21,9 @@ spec:
         name: k8scomplex-stage
         ports:
         - containerPort: 80
+        resources:
+          limits:
+            cpu: 10m
+          requests:
+            cpu: 10m
 
