@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prod
+  labels:
+    k8scomplex-cluster: prod
+  namespace: k8scomplex
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      k8scomplex-cluster: prod
+  template:
+    metadata:
+      labels:
+        k8scomplex-cluster: prod
+        k8scomplex-service: prod
+    spec:
+      containers:
+      - image: gcr.io/spinnaker-1022/k8scomplex:release
+        name: k8scomplex-prod
+        ports:
+        - containerPort: 80
+

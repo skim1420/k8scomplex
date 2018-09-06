@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stage
+  labels:
+    k8scomplex-cluster: stage
+  namespace: k8scomplex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8scomplex-cluster: stage
+  template:
+    metadata:
+      labels:
+        k8scomplex-cluster: stage
+        k8scomplex-service: stage
+    spec:
+      containers:
+      - image: gcr.io/spinnaker-1022/k8scomplex:release
+        name: k8scomplex-stage
+        ports:
+        - containerPort: 80
+

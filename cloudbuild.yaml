@@ -1,0 +1,9 @@
+steps:
+  - name: "gcr.io/cloud-builders/go"
+    args: ["install", "github.com/skim1420/k8scomplex"]
+    env: ["PROJECT_ROOT=github.com/skim1420/k8scomplex"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/spinnaker-1022/k8scomplex:release", "-t", "gcr.io/spinnaker-1022/k8scomplex:$REVISION_ID", "-f", "Dockerfile.gcb", "."]
+images:
+  - "gcr.io/spinnaker-1022/k8scomplex:$REVISION_ID"
+  - "gcr.io/spinnaker-1022/k8scomplex:release"

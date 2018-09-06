@@ -1,0 +1,5 @@
+FROM alpine
+
+COPY gopath/bin/k8scomplex /go/bin/k8scomplex
+
+ENTRYPOINT /go/bin/k8scomplex
