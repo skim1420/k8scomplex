@@ -1,0 +1,29 @@
+[
+  {% for image in results.images %}
+  {
+    {% set split = image.name.split(":") %}
+    "reference": "{{ split[0] }}@{{ image.digest }}",
+    "name": "{{ image.name }}",
+    "version": "{{ image.digest }}",
+    "type": "docker/image"
+  }, {% endfor %}
+  {
+    "type": "github/file",
+    "name": "k8scomplex-rs-stage.yml",
+    "reference": "https://api.github.com/repos/skim1420/k8scomplex/contents/k8s/k8scomplex-rs-stage.yml",
+    "version": "{{ sourceProvenance.resolvedRepoSource.commitSha }}"
+  },
+  {
+    "type": "github/file",
+    "name": "k8scomplex-rs-prod-region1.yml",
+    "reference": "https://api.github.com/repos/skim1420/k8scomplex/contents/k8s/k8scomplex-rs-prod-region1.yml",
+    "version": "{{ sourceProvenance.resolvedRepoSource.commitSha }}"
+  },
+  {
+    "type": "github/file",
+    "name": "k8scomplex-rs-prod-region2.yml",
+    "reference": "https://api.github.com/repos/skim1420/k8scomplex/contents/k8s/k8scomplex-rs-prod-region2.yml",
+    "version": "{{ sourceProvenance.resolvedRepoSource.commitSha }}"
+  }
+]
+
