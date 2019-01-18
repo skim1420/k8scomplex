@@ -1,10 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
   name: prod
   labels:
     k8scomplex-cluster: prod
   namespace: k8scomplex
+  annotations:
+    strategy.spinnaker.io/max-version-history: '2'
+    traffic.spinnaker.io/load-balancers: '["service prod"]'
 spec:
   replicas: 8
   selector:
@@ -14,7 +17,6 @@ spec:
     metadata:
       labels:
         k8scomplex-cluster: prod
-        k8scomplex-service: prod
     spec:
       containers:
       - image: gcr.io/spinnaker-1022/k8scomplex:release

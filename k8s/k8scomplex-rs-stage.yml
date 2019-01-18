@@ -1,10 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
   name: stage
   labels:
     k8scomplex-cluster: stage
   namespace: k8scomplex
+  annotations:
+    strategy.spinnaker.io/max-version-history: '4'
+    traffic.spinnaker.io/load-balancers: '["service stage"]'
 spec:
   replicas: 1
   selector:
@@ -14,7 +17,6 @@ spec:
     metadata:
       labels:
         k8scomplex-cluster: stage
-        k8scomplex-service: stage
     spec:
       containers:
       - image: gcr.io/spinnaker-1022/k8scomplex:release
